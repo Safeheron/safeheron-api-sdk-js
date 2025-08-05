@@ -35,6 +35,12 @@ export interface CoSignerRequestV3 {
   sig: string;
 }
 
+export interface CoSignerBizContentV3 {
+    approvalId: string;
+    type: string;
+    detail: object;
+}
+
 export interface CoSignerResponse {
   code: number;
   timestamp: string;

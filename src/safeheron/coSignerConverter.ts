@@ -8,6 +8,8 @@ import {
     CoSignerResponseWithNewCryptoType
 } from '../model/BaseModel';
 import crypto from "crypto";
+import {readFileSync} from "fs";
+import path from "path";
 
 export class CoSignerConverter {
     config: SafeheronCoSignerConfig;
@@ -15,6 +17,26 @@ export class CoSignerConverter {
     aes: AES;
 
     constructor(config: SafeheronCoSignerConfig) {
+        // support read from file.
+        if (config.approvalCallbackServicePrivateKey && config.approvalCallbackServicePrivateKey.startsWith("file:")) {
+            config.approvalCallbackServicePrivateKey = readFileSync(path.resolve(config.approvalCallbackServicePrivateKey.substring(5)), 'utf8');
+        }
+
+        // Support base64 format approvalCallbackServicePrivateKey.
+        if (config.approvalCallbackServicePrivateKey && !config.approvalCallbackServicePrivateKey.startsWith("-----BEGIN")) {
+            config.approvalCallbackServicePrivateKey = ["-----BEGIN PRIVATE KEY-----", config.approvalCallbackServicePrivateKey, "-----END PRIVATE KEY-----"].join("\n")
+        }
+
+        // support read from file.
+        if (config.coSignerPubKey && config.coSignerPubKey.startsWith("file:")) {
+            config.coSignerPubKey = readFileSync(path.resolve(config.coSignerPubKey.substring(5)), 'utf8');
+        }
+
+        // Support base64 format coSignerPubKey.
+        if (config.coSignerPubKey && !config.coSignerPubKey.startsWith("-----BEGIN")) {
+            config.coSignerPubKey = ["-----BEGIN PUBLIC KEY-----", config.coSignerPubKey, "-----END PUBLIC KEY-----"].join("\n")
+        }
+
         this.config = config;
         this.aes = new AES();
         //Supports both coSignerPubKey and apiPublKey

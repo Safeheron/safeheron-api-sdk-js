@@ -18,7 +18,7 @@ export class AES {
 
     encryptGCM(srcData: string, key: CipherKey, iv: BinaryLike): string {
         const cipher = crypto.createCipheriv(this.algorithmGCM, key, iv);
-        let encrypted = cipher.update(srcData, 'uft8' as Encoding, 'base64')
+        let encrypted = cipher.update(srcData, 'utf8' as Encoding, 'base64')
         encrypted += cipher.final('base64');
         const tags = cipher.getAuthTag();
         const encryptedBuffer = Buffer.from(encrypted, 'base64');
