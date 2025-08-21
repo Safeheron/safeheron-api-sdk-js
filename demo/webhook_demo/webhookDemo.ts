@@ -32,6 +32,8 @@ async function main() {
         });
 
         const webHook = converter.convertWebHook({
+            //rsaType:"ECB_OAEP",
+            //aesType:"GCM_NOPADDING",
             bizContent: 'AES-encrypted data of request parameters',
             key: 'Data obtained by using webhook RSA public key encrypt random AES key',
             timestamp: 'Callback timestamp, UNIX millisecond-format string',
