@@ -282,11 +282,6 @@ export interface TransactionsResponse {
     realDestinationAccountType: string;
 
     /**
-     * Transaction substatus description
-     */
-    transactionSubStatusDesc: string;
-
-    /**
      * Amount in USD when transact
      */
     txAmountToUsd: string;
@@ -296,20 +291,12 @@ export interface TransactionsResponse {
      */
     sourceAccountName: string;
 
-    /**
-     * Source account type name
-     */
-    sourceAccountTypeName: string;
 
     /**
      * Destination account name
      */
     destinationAccountName: string;
 
-    /**
-     * Destination account type name
-     */
-    destinationAccountTypeName: string;
 
     /**
      * Final approver username
@@ -381,6 +368,11 @@ export interface ListTransactionsV2Request extends LimitSearch {
      * Destination account type
      */
     destinationAccountType?: string;
+
+    /**
+     * The unique identifier key of a wallet account, used to query all transactions under that wallet. This is only supported for VAULT_ACCOUNT type wallets. This has a higher priority than sourceAccountKey, sourceAccountType, destinationAccountKey, destinationAccountType, and realDestinationAccountType. If accountKey is passed along with the five parameters mentioned above, only accountKey will be effective
+     */
+    accountKey?: string;
 
     /**
      * Start time for creating a transaction, UNIX timestamp (ms)
@@ -977,12 +969,7 @@ export interface OneTransactionsResponse {
     /**
      * Type of actual destination account
      */
-    realDestinationAccountType: string;
-
-    /**
-     * Transaction substatus description
-     */
-    transactionSubStatusDesc: string;
+    realDestinationAccountType: string
 
     /**
      * Amount in USD when transact
@@ -994,20 +981,12 @@ export interface OneTransactionsResponse {
      */
     sourceAccountName: string;
 
-    /**
-     * Source account type name
-     */
-    sourceAccountTypeName: string;
 
     /**
      * Destination account name
      */
     destinationAccountName: string;
 
-    /**
-     * Destination account type name
-     */
-    destinationAccountTypeName: string;
 
     /**
      * Final approver username
