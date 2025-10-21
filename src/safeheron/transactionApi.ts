@@ -227,7 +227,7 @@ export interface TransactionsResponse {
     /**
      * Total fee
      */
-    gasFee?: Array<GasFee>;
+    gasFee: Array<GasFee>;
 
     /**
      * Quoted transaction hash (only for sped-up transactions)
@@ -733,12 +733,12 @@ export interface GasFee {
     /**
      * Currency of handling fees paid, such as TRX, ETH, BSC, ARB, POL, USDT
      */
-    symbol?: string;
+    symbol: string;
 
     /**
      * Amount of fees paid
      */
-    amount: boolean;
+    amount: string;
 }
 
 export interface TxKeyResult {
@@ -935,7 +935,7 @@ export interface OneTransactionsResponse {
     /**
      * Total fee
      */
-    gasFee?: Array<GasFee>;
+    gasFee: Array<GasFee>;
 
     /**
      * Quoted transaction hash (only for sped-up transactions)
