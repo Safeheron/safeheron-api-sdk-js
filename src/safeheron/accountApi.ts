@@ -20,6 +20,22 @@ export interface ListAccountRequest extends PageSearch {
      * Default: retrieve all wallet accounts
      */
     hiddenOnUI?: boolean;
+
+    /**
+     * Filter wallets based on autoFuel setting:
+     * Default: Ignore this query parameter
+     * true: Only query wallets where autoFuel is set to true
+     * false: Only query wallets where autoFuel is set to false
+     */
+    autoFuel?: boolean;
+
+    /**
+     * Wallet's archive status in Safeheron App and Web Console
+     * True: Archived
+     * False: Unarchived
+     */
+    archived?: boolean;
+
     /**
      * Filter the response based on this account name prefix
      */
@@ -109,6 +125,18 @@ export interface AccountResponse {
     hiddenOnUI: boolean;
 
     /**
+     * When initiating a transaction, Gas Service automatically supplements the Gas fee for wallets where autoFuel is true
+     */
+    autoFuel: boolean;
+
+    /**
+     * Wallet's archive status in Safeheron App and Web Console
+     * True: Archived
+     * False: Unarchived
+     */
+    archived: boolean;
+
+    /**
      * Account balance, in USD when retrieve
      */
     usdBalance: string;
@@ -148,6 +176,12 @@ export interface CreateAccountRequest {
      * Default: false
      */
     hiddenOnUI?: boolean;
+
+    /**
+     * Auto-refuel. If set to true, the Gas Service will automatically supplement the Gas fee for the wallet when a transaction is initiated. The default value is false
+     */
+    autoFuel?: boolean;
+
     /**
      * Account tag
      */
@@ -226,7 +260,12 @@ export interface BatchCreateAccountRequest {
      * False: display
      * Default: true
      */
-    hiddenOnUI: boolean;
+    hiddenOnUI?: boolean;
+
+    /**
+     * Auto-refuel. If set to true, the Gas Service will automatically supplement the Gas fee for the wallet when a transaction is initiated. The default value is false
+     */
+    autoFuel?: boolean;
 
     /**
      * Number of wallets to be created, greater than 0, less than 100
@@ -270,6 +309,18 @@ export interface BatchUpdateAccountTagRequest {
      * Account tag
      */
     accountTag: string;
+}
+
+export interface BatchUpdateAccountFuelRequest {
+    /**
+     * Account key, max is 100
+     */
+    accountKeyList: Array<string>;
+
+    /**
+     * If set to true, Gas Service will automatically supplement the transaction fee (Gas) for the wallet when a transaction is initiated
+     */
+    autoFuel?: boolean;
 }
 
 
@@ -843,6 +894,14 @@ export class AccountApi {
      */
     async batchUpdateAccountTag(request: BatchUpdateAccountTagRequest): Promise<ResultResponse> {
         return await this.client.doRequest<BatchUpdateAccountTagRequest, ResultResponse>('/v1/account/batch/update/tag', request);
+    }
+
+    /**
+     * Batch Set Auto-Fuel
+     * Set the autoFuel property for a batch of wallet accounts. Setting it to true means that the Gas Service will automatically supplement the transaction fee (Gas) for that wallet when a transaction is initiated; setting it to false means the Gas Service will no longer supplement the transaction fee for the wallet.
+     */
+    async batchUpdateAccountAutofuel(request: BatchUpdateAccountFuelRequest): Promise<ResultResponse> {
+        return await this.client.doRequest<BatchUpdateAccountFuelRequest, ResultResponse>('/v1/account/batch/update/autofuel', request);
     }
 
     /**

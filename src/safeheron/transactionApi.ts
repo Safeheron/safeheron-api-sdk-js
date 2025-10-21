@@ -225,6 +225,11 @@ export interface TransactionsResponse {
     feeCoinKey: string;
 
     /**
+     * Total fee
+     */
+    gasFee?: Array<GasFee>;
+
+    /**
      * Quoted transaction hash (only for sped-up transactions)
      */
     replaceTxHash: string;
@@ -723,6 +728,19 @@ export interface DestinationAddress {
     addressGroupKey?: string;
 }
 
+
+export interface GasFee {
+    /**
+     * Currency of handling fees paid, such as TRX, ETH, BSC, ARB, POL, USDT
+     */
+    symbol?: string;
+
+    /**
+     * Amount of fees paid
+     */
+    amount: boolean;
+}
+
 export interface TxKeyResult {
     /**
      * Transaction key
@@ -913,6 +931,11 @@ export interface OneTransactionsResponse {
      * Coin key that is used to pay for the transaction fee when conducting a transfer, such as when transferring ERC-20 tokens, transaction fees are paid in ETH
      */
     feeCoinKey: string;
+
+    /**
+     * Total fee
+     */
+    gasFee?: Array<GasFee>;
 
     /**
      * Quoted transaction hash (only for sped-up transactions)

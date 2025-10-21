@@ -6,6 +6,11 @@ export interface GasStatusResponse {
      * Gas Balance
      */
     gasBalance: Array<GasBalance>;
+
+    /**
+     * Gas configuration
+     */
+    configuration: Array<Configuration>;
 }
 
 export interface GasBalance {
@@ -20,6 +25,17 @@ export interface GasBalance {
     amount: string;
 }
 
+export interface Configuration {
+    /**
+     * Network. Currently supported networks are: Ethereum、TRON、BNB Smart Chain、Arbitrum、Polygon
+     */
+    network: string;
+
+    /**
+     * Whether automatic refueling is enabled
+     */
+    enabled: boolean;
+}
 
 export interface GasTransactionsGetByTxKeyRequest {
     /**

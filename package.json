@@ -24,7 +24,7 @@
   "license": "MIT",
   "homepage": "https://github.com/Safeheron/safeheron-api-sdk-js",
   "dependencies": {
-    "axios": "^1.8.2",
+    "axios": "^1.11.0",
     "tslib": "^2.4.0"
   },
   "devDependencies": {
