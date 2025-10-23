@@ -1,6 +1,6 @@
 {
   "name": "@safeheron/api-sdk",
-  "version": "1.0.25",
+  "version": "1.0.26",
   "description": "Javascript & Typescript SDK for Safeheron API",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
