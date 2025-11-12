@@ -62,6 +62,13 @@ export interface OneAccountRequest {
     customerRefId?: string;
 }
 
+export interface OneAccountByAddressRequest {
+    /**
+     * The wallet address. Note: Wallet addresses for the TRON, Solana, and TON networks are case-sensitive, while other networks are case-insensitive
+     */
+    address: string;
+}
+
 export interface PageResult<T> {
     /**
      * Page number
@@ -854,6 +861,13 @@ export class AccountApi {
      */
     async oneAccounts(request: OneAccountRequest): Promise<AccountResponse> {
         return await this.client.doRequest<OneAccountRequest, AccountResponse>('/v1/account/one', request);
+    }
+
+    /**
+     * Query Wallet Account by Address
+     */
+    async getAccountByAddress(request: OneAccountByAddressRequest): Promise<AccountResponse> {
+        return await this.client.doRequest<OneAccountByAddressRequest, AccountResponse>('/v1/account/getByAddress', request);
     }
 
     /**
