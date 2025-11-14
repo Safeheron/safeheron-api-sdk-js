@@ -155,6 +155,18 @@ export interface ListWeb3AccountRequest extends LimitSearch {
     customerRefId?: string;
 }
 
+export interface OneWeb3AccountRequest {
+    /**
+     * Account Key, the only account identifier。The Account Key, which is the unique identifier for the account. Cannot be empty at the same time as the customerRefId parameter. If both are provided, the accountKey parameter will take precedence.
+     */
+    accountKey?: string;
+
+    /**
+     * Merchant unique business ID (100 characters max)
+     */
+    customerRefId?: string;
+}
+
 export interface CreateWeb3EthSignRequest {
     /**
      * Source account key
@@ -711,6 +723,14 @@ export class Web3Api {
      */
     async listWeb3Accounts(request: ListWeb3AccountRequest): Promise<Array<Web3AccountResponse>> {
         return await this.client.doRequest<ListWeb3AccountRequest, Array<Web3AccountResponse>>('/v1/web3/account/list', request);
+    }
+
+    /**
+     * Retrieve a Single Web3 Wallet Account
+     * Retrieve a single web3 wallet account based on accountKey or customerRefId
+     */
+    async oneWeb3Account(request: OneWeb3AccountRequest): Promise<Web3AccountResponse> {
+        return await this.client.doRequest<OneWeb3AccountRequest, Web3AccountResponse>('/v1/web3/account/one', request);
     }
 
     /**
