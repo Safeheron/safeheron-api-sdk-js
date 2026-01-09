@@ -63,7 +63,7 @@ export class ComplianceApi {
     }
 
     /**
-     * Create AML Risk Assessment Request
+     * Retrieve Transaction KYT Report
      */
     async kytReport(request: KytReportRequest): Promise<KytReportResponse> {
         return await this.client.doRequest<KytReportRequest, KytReportResponse>('/v1/compliance/kyt/report', request);
