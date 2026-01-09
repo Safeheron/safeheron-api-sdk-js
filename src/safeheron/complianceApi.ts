@@ -15,7 +15,7 @@ export interface KytReportRequest {
 }
 
 
-export interface KytRepostResponse {
+export interface KytReportResponse {
     /**
      * Transaction key
      */
@@ -65,7 +65,7 @@ export class ComplianceApi {
     /**
      * Create AML Risk Assessment Request
      */
-    async kytReport(request: KytReportRequest): Promise<KytRepostResponse> {
-        return await this.client.doRequest<KytReportRequest, KytRepostResponse>('/v1/compliance/kyt/report', request);
+    async kytReport(request: KytReportRequest): Promise<KytReportResponse> {
+        return await this.client.doRequest<KytReportRequest, KytReportResponse>('/v1/compliance/kyt/report', request);
     }
 }
