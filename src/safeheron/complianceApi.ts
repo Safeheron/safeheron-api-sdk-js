@@ -29,11 +29,11 @@ export interface KytReportResponse {
     /**
      * 	AML assessment information
      */
-    amlList: Array<AmlAndReport>;
+    amlList: Array<AmlReport>;
 }
 
 
-export interface AmlAndReport {
+export interface AmlReport {
     provider: string;
 
     timestamp: string;
