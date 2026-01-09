@@ -318,6 +318,9 @@ export interface TransactionsResponse {
      */
     transactionDirection: string;
 
+    /**
+     * 	AML assessment information
+     */
     amlList: Array<Aml>;
 }
 
@@ -1033,6 +1036,9 @@ export interface OneTransactionsResponse {
      */
     transactionDirection: string;
 
+    /**
+     * 	AML assessment information
+     */
     amlList: Array<Aml>;
 }
 

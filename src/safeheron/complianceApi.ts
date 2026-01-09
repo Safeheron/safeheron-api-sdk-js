@@ -27,13 +27,13 @@ export interface KytReportResponse {
     customerRefId: string;
 
     /**
-     * MistTrack risk assessment result
+     * 	AML assessment information
      */
-    amlList: Array<Aml>;
+    amlList: Array<AmlAndReport>;
 }
 
 
-export interface Aml {
+export interface AmlAndReport {
     provider: string;
 
     timestamp: string;
