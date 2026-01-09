@@ -317,6 +317,8 @@ export interface TransactionsResponse {
      * Transaction Direction
      */
     transactionDirection: string;
+
+    amlList: Array<Aml>;
 }
 
 export interface SourceAddress {
@@ -1030,6 +1032,20 @@ export interface OneTransactionsResponse {
      * Transaction Direction
      */
     transactionDirection: string;
+
+    amlList: Array<Aml>;
+}
+
+export interface Aml {
+    provider: string;
+
+    timestamp: string;
+
+    status: string;
+
+    riskLevel: string;
+
+    lastUpdateTime: string;
 }
 
 export interface ApprovalDetailTransactionsRequest {
