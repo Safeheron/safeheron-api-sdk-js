@@ -319,6 +319,14 @@ export interface TransactionsResponse {
     transactionDirection: string;
 
     /**
+     * Whether AML compliance screening was triggered for the transaction:
+     * IN_PROGRESS: Evaluating — not yet confirmed whether screening will be triggered; amlList is unavailable, please wait for a status update
+     * TRIGGERED: Triggered — screening was successfully initiated; check amlList for risk assessment results
+     * UNTRIGGERED: Not triggered — screening was not initiated; amlList is empty
+     */
+    amlScreeningTriggeredState: string;
+
+    /**
      * 	AML assessment information
      */
     amlList: Array<Aml>;
@@ -1035,6 +1043,14 @@ export interface OneTransactionsResponse {
      * Transaction Direction
      */
     transactionDirection: string;
+
+    /**
+     * Whether AML compliance screening was triggered for the transaction:
+     * IN_PROGRESS: Evaluating — not yet confirmed whether screening will be triggered; amlList is unavailable, please wait for a status update
+     * TRIGGERED: Triggered — screening was successfully initiated; check amlList for risk assessment results
+     * UNTRIGGERED: Not triggered — screening was not initiated; amlList is empty
+     */
+    amlScreeningTriggeredState: string;
 
     /**
      * 	AML assessment information
