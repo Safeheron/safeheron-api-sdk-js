@@ -16,6 +16,19 @@ or
 yarn add @safeheron/api-sdk
 ```
 
+# AI-Powered Development
+
+Use the **Safeheron Skill** with Claude Code or Cursor to generate, debug, and troubleshoot Safeheron API integrations using natural language.
+
+**Example prompts:**
+- "Help me set up an API Co-Signer approval callback service"
+- "Write a Webhook handler to process incoming transaction events"
+- "What causes error 1012 and how do I fix it?"
+
+**Get started:**
+
+View the Skill source code on GitHub: [safeheron/safeheron-skill](https://github.com/safeheron/safeheron-skill)
+
 # Usage
 
 > Take `/v1/account/create` as an example to explain, the complete code can be found in `demo/api_demo/` directory
