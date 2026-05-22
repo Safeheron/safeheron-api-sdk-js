@@ -1,6 +1,13 @@
 import {SafeheronClient} from '../safeheron';
 import {SafeheronConfig} from "../config";
 
+export interface GasStatusRequest {
+    /**
+     * networkMode
+     */
+    networkMode: string;
+}
+
 export interface GasStatusResponse {
     /**
      * Gas Balance
@@ -129,8 +136,8 @@ export class GasApi {
      * Retrieve Gas Balance
      * Retrieve your Gas balance for the TRON energy rental service.
      */
-    async gasStatus(): Promise<GasStatusResponse> {
-        return await this.client.doRequest<null, GasStatusResponse>('/v1/gas/status', null);
+    async gasStatus(request: GasStatusRequest): Promise<GasStatusResponse> {
+        return await this.client.doRequest<GasStatusRequest, GasStatusResponse>('/v1/gas/status', request);
     }
 
 
