@@ -100,6 +100,11 @@ export interface WhitelistResponse {
     whitelistStatus?: string;
 
     /**
+     * Note
+     */
+    note?: string;
+
+    /**
      * Whitelist creation time in UNIX timestamp (ms)
      */
     createTime?: number;
@@ -150,6 +155,11 @@ export interface CreateWhitelistRequest {
      * True: Invisible; the invisible whitelist can only be managed and used through the API, such as querying, modifying, and using the whitelist as the destination address when initiating transactions
      */
     hiddenOnUI?: boolean;
+
+    /**
+     * Note
+     */
+    note?: string;
 }
 
 export interface CreateFromTransactionWhitelistRequest {
@@ -181,6 +191,11 @@ export interface CreateFromTransactionWhitelistRequest {
      * True: Invisible; the invisible whitelist can only be managed and used through the API, such as querying, modifying, and using the whitelist as the destination address when initiating transactions
      */
     hiddenOnUI?: boolean;
+
+    /**
+     * Note
+     */
+    note?: string;
 }
 
 export interface CreateWhitelistResponse {
@@ -219,6 +234,11 @@ export interface EditWhitelistRequest {
      * When the whitelist is involved in a transaction approval policy, modifications will result in the new whitelist being directly applied to the approval policy. False by default, meaning that when involved in a transaction approval policy, it will not be modified.
      */
     force: boolean;
+
+    /**
+     * Note
+     */
+    note: string;
 }
 
 export interface DeleteWhitelistRequest {

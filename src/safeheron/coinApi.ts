@@ -183,6 +183,13 @@ export interface CheckCoinAddressRequest {
      * False: not verify
      */
     checkAddressValid?: boolean;
+
+    /**
+     * Verify if the Solana address is the Owner address (If no value is provided, 'false' by default)
+     * True: Verify
+     * False: Not verify
+     */
+    checkSolanaOwnerAddress?: boolean;
 }
 
 export interface CheckCoinAddressResponse {
@@ -206,6 +213,13 @@ export interface CheckCoinAddressResponse {
      * False: AML blacklisted address
      */
     amlValid: boolean;
+
+    /**
+     * Solana owner address
+     * True: Solana owner address
+     * False: Non-solana owner address
+     */
+    solanaOwnerAddress: boolean;
 }
 
 export interface CoinBalanceSnapshotRequest {
