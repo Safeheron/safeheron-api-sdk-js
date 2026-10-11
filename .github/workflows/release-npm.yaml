@@ -3,6 +3,15 @@ name: Release
 on:
   release:
     types: [ released ]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Override version for a test stage, e.g. 1.0.32-stage.0 (staged with dist-tag "test"). Leave empty to stage the package.json version as latest.'
+        required: false
+
+permissions:
+  contents: read
+  id-token: write
 
 jobs:
   maybe-release:
@@ -12,13 +21,16 @@ jobs:
     steps:
 
       - name: Checkout respository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Use Node.js
-        uses: actions/setup-node@v3.4.1
+        uses: actions/setup-node@v4
         with:
-          node-version: 16
+          node-version: 24
           registry-url: 'https://registry.npmjs.org'
+
+      - name: Upgrade npm
+        run: npm install -g npm@^11.15.0
 
       - name: Install dependencies
         run: npm ci
@@ -26,8 +38,11 @@ jobs:
       - name: Run compile
         run: npm run build
 
-      - name: Run publish
-        run: npm publish --access public
+      - name: Set test version
+        if: ${{ inputs.version != '' }}
+        run: npm version "$VERSION" --no-git-tag-version
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          VERSION: ${{ inputs.version }}
 
+      - name: Run stage publish
+        run: npm stage publish --access public --tag ${{ inputs.version != '' && 'test' || 'latest' }}
