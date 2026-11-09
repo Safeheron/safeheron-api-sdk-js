@@ -1,5 +1,6 @@
 import {SafeheronClient} from '../safeheron';
 import {SafeheronConfig} from "../config";
+import {LimitSearch} from "./transactionApi";
 
 export interface PageSearch {
     /**
@@ -13,6 +14,44 @@ export interface PageSearch {
 }
 
 export interface ListAccountRequest extends PageSearch {
+    /**
+     * Filter whether there are not-displayed wallet accounts in Safeheron Console
+     * True: retrieve hidden wallet accounts
+     * False: retrieve displayed wallet accounts
+     * Default: retrieve all wallet accounts
+     */
+    hiddenOnUI?: boolean;
+
+    /**
+     * Filter wallets based on autoFuel setting:
+     * Default: Ignore this query parameter
+     * true: Only query wallets where autoFuel is set to true
+     * false: Only query wallets where autoFuel is set to false
+     */
+    autoFuel?: boolean;
+
+    /**
+     * Wallet's archive status in Safeheron App and Web Console
+     * True: Archived
+     * False: Unarchived
+     */
+    archived?: boolean;
+
+    /**
+     * Filter the response based on this account name prefix
+     */
+    namePrefix?: string;
+    /**
+     * Filter the response based on this account name suffix
+     */
+    nameSuffix?: string;
+    /**
+     * Merchant unique business ID (100 characters max)
+     */
+    customerRefId?: string;
+}
+
+export interface ListAccountV2Request extends LimitSearch {
     /**
      * Filter whether there are not-displayed wallet accounts in Safeheron Console
      * True: retrieve hidden wallet accounts
@@ -853,6 +892,14 @@ export class AccountApi {
      */
     async listAccounts(request: ListAccountRequest): Promise<PageResult<AccountResponse>> {
         return await this.client.doRequest<ListAccountRequest, PageResult<AccountResponse>>('/v1/account/list', request);
+    }
+
+    /**
+     * List Wallet Accounts V2
+     * Filter wallet account lists in team according to different combinations of conditions, using cursor-based pagination.
+     */
+    async listAccountsV2(request: ListAccountV2Request): Promise<Array<AccountResponse>> {
+        return await this.client.doRequest<ListAccountV2Request, Array<AccountResponse>>('/v2/account/list', request);
     }
 
     /**
